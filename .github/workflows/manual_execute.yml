@@ -1,0 +1,13 @@
+name: Manual Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      PARAMETER:
+        required: true
+
+jobs:
+  deploy2:
+    uses: ./.github/workflows/shared_process.yml
+    with:
+      PARAMETER: ${{ github.event.inputs.PARAMETER  }}
