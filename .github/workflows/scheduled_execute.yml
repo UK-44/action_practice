@@ -15,9 +15,9 @@ jobs:
         id: set-parameter
         run: |
           if [[ "${{ github.event.schedule }}" == "*/5 * * * *" ]]; then
-            echo "PARAMETER=スケジュールテスト(5分毎)" >> $GITHUB_OUTPUT
+            echo "PARAMETER=スケジュール_5分毎" >> $GITHUB_OUTPUT
           elif [[ "${{ github.event.schedule }}" == "*/10 * * * *" ]]; then
-            echo "PARAMETER=スケジュールテスト(10分毎)" >> $GITHUB_OUTPUT
+            echo "PARAMETER=スケジュール_10分毎" >> $GITHUB_OUTPUT
           fi
 
   execute-job:
