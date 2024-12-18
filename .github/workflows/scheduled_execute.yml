@@ -1,0 +1,27 @@
+name: Scheduled Execute
+
+on:
+  schedule:
+    - cron: "*/5 * * * *" # 5分に1回
+    - cron: "*/10 * * * *" # 10分に1回
+
+jobs:
+  scheduled-job:
+    runs-on: ubuntu-latest
+    outputs:
+      PARAMETER: ${{ steps.set-parameter.outputs.PARAMETER }}
+    steps:
+      - name: Set environment variables
+        id: set-parameter
+        run: |
+          if [[ "${{ github.event.schedule }}" == "*/5 * * * *" ]]; then
+            echo "PARAMETER=スケジュールテスト(5分毎)" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event.schedule }}" == "*/10 * * * *" ]]; then
+            echo "PARAMETER=スケジュールテスト(10分毎)" >> $GITHUB_OUTPUT
+          fi
+
+  execute-job:
+    needs: scheduled-job
+    uses: ./.github/workflows/shared_process.yml
+    with:
+      PARAMETER: ${{ needs.scheduled-job.outputs.PARAMETER }}
