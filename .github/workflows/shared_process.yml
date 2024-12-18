@@ -1,0 +1,17 @@
+name: Shared Process
+
+on:
+  workflow_call:
+    inputs:
+      PARAMETER:
+        type: string
+ 
+env:
+  PARAMETER: ${{ inputs.PARAMETER }}
+
+jobs:
+  echo-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: actions test
+        run: echo ${{ inputs.PARAMETER }}
