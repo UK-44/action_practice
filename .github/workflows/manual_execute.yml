@@ -1,4 +1,4 @@
-name: Manual Deploy
+name: Manual Execute
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
         required: true
 
 jobs:
-  deploy2:
+  manual-job:
     uses: ./.github/workflows/shared_process.yml
     with:
       PARAMETER: ${{ inputs.PARAMETER }}
